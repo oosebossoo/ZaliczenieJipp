@@ -1,6 +1,9 @@
 ﻿using ConsoleApp1.Builders;
 using ConsoleApp1.Models;
 using ConsoleApp1.Repositories;
+using System.ComponentModel;
+using System.Reflection.Metadata.Ecma335;
+using System.Xml.Linq;
 
 // ---------
 // ZADANIE 3
@@ -10,6 +13,7 @@ BaseRepository baseRepository = new BaseRepository();
 
 AirConditioningRepository airConditioningRepository = new AirConditioningRepository(baseRepository);
 HeaterRepository heaterRepository = new HeaterRepository(baseRepository);
+LightRepository lightRepository = new LightRepository(baseRepository);
 
 //    Light device1 = new Light(baseRepository.GetAll().Count() + 1, "bath_room_light_1", "indoor", 0, 0, "FFFFFF", 255);
 //    baseRepository.Add(device1);
@@ -61,30 +65,163 @@ HeaterRepository heaterRepository = new HeaterRepository(baseRepository);
 int input;
 while (true)
 {
-    input = Convert.ToInt32(Console.ReadKey());
-
     Console.WriteLine("1 - lista urządzeń");
-    Console.WriteLine("2 - wybierz urządzenie");
-    Console.WriteLine("2 - dodaj urządzenie");
-    Console.WriteLine("3 - usuń urządzenie");
+    Console.WriteLine("2 - wybierz urządzenie(in progress)");
+    Console.WriteLine("3 - dodaj urządzenie");
+    Console.WriteLine("4 - usuń urządzenie");
+    Console.WriteLine("5 - wyszukaj po nazwie");
     Console.WriteLine("0 - wyjdź z programu");
+
+    input = Convert.ToInt32(Console.ReadLine());
 
     if (input == 1)
     {
-
+        showAllView();
     }
     if (input == 2)
     {
-
+        selectDeviceView();
     }
     if (input == 3)
     {
-
+        addDeviceView();
     }
     if (input == 4)
     {
-
+        deleteDeviceView();
     }
-    if (input < 0)
+    if (input == 5)
+    {
+        searchByName();
+    }
+    if (input < 1)
         break;
+
+    Console.Clear();
+}
+
+void showAllView()
+{
+    Console.Clear();
+    Console.WriteLine("+-----------------------------------+");
+    Console.WriteLine("| id | name | type | status |");
+    List<Device> devices = baseRepository.GetAll();
+    foreach(Device device in devices)
+    {
+        Console.Write("| ");
+        Console.Write($"{device.Id}");
+        Console.Write(" | ");
+        Console.Write($"{device.Name}");
+        Console.Write(" | ");
+        Console.Write($"{device.Type}");
+        Console.Write(" | ");
+        Console.Write($"{device.Status}");
+        Console.WriteLine(" | ");
+    }
+    Console.WriteLine("+-----------------------------------+");
+    Console.ReadKey();
+}
+
+void selectDeviceView()
+{
+    Console.WriteLine("selectDeviceView");
+
+}
+
+void addDeviceView()
+{
+    Console.Clear();
+    Console.WriteLine("1 - żarówka");
+    Console.WriteLine("2 - klimatyzacja");
+    Console.WriteLine("3 - grzejnik");
+
+    input = Convert.ToInt32(Console.ReadLine());
+
+    if (input == 1)
+    {
+        addLight();
+    }
+    if (input == 2)
+    {
+        addAC();
+    }
+    if (input == 3)
+    {
+        addHeater();
+    }
+}
+
+void addLight()
+{
+    string name;
+    string type;
+    Console.WriteLine("Dodawanie światła");
+    Console.WriteLine("Podaj nazwe: ");
+    name = Convert.ToString(Console.ReadLine());
+    Console.WriteLine("Podaj typ(outdoor/indoor): ");
+    type = Convert.ToString(Console.ReadLine());
+    baseRepository.Add(new Light(baseRepository.GetAll().Count() + 1, name, type, 0, 0, "FFFFFF", 255));
+    Console.ReadKey();
+}
+
+void addAC()
+{
+    string name;
+    string type;
+    Console.WriteLine("Dodawanie Klimatyzacji");
+    Console.WriteLine("Podaj nazwe: ");
+    name = Convert.ToString(Console.ReadLine());
+    Console.WriteLine("Podaj typ(outdoor/indoor): ");
+    type = Convert.ToString(Console.ReadLine());
+    baseRepository.Add(new AirConditioning(baseRepository.GetAll().Count() + 1, name, type, 0, 0, 5, 20, 5, 5));
+    Console.ReadKey();
+}
+
+void addHeater()
+{
+    string name;
+    string type;
+    Console.WriteLine("Dodawanie Klimatyzacji");
+    Console.WriteLine("Podaj nazwe: ");
+    name = Convert.ToString(Console.ReadLine());
+    Console.WriteLine("Podaj typ(outdoor/indoor): ");
+    type = Convert.ToString(Console.ReadLine());
+    baseRepository.Add(new Heater(baseRepository.GetAll().Count() + 1, name, type, 0, 0, 30, 0));
+    Console.ReadKey();
+}
+
+void deleteDeviceView()
+{
+    showAllView();
+    int id;
+    Console.WriteLine("Podaj id urządzenia");
+    id = Convert.ToInt32(Console.ReadLine());
+    baseRepository.Delete(id);
+    Console.ReadKey();
+}
+
+void searchByName()
+{
+    string name;
+    Console.Clear();
+    Console.WriteLine("Podaj nazwe: ");
+    name = Convert.ToString(Console.ReadLine());
+
+    List<Device> devices = baseRepository.GetAll();
+    foreach(Device device in devices)
+    {
+        if (device.Name == name)
+        {
+            Console.Write("| ");
+            Console.Write($"{device.Id}");
+            Console.Write(" | ");
+            Console.Write($"{device.Name}");
+            Console.Write(" | ");
+            Console.Write($"{device.Type}");
+            Console.Write(" | ");
+            Console.Write($"{device.Status}");
+            Console.WriteLine(" | ");
+        }
+    }
+    Console.ReadKey();
 }
