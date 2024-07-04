@@ -9,6 +9,8 @@
 
         private static string className { get; set; }
 
+        public AirConditioning() {}
+
         public AirConditioning(int Id, string Name, string Type, int Status, int ActiveTime, int FanSpeed, int Temperature, int DirectionX, int DirectionY)
         {
             this.Id = Id;
@@ -29,11 +31,6 @@
         public static string ClassName()
         {
             return className;
-        }
-
-        public int GetDirectionX()
-        {
-            return this.DirectionX;
         }
     }
 }

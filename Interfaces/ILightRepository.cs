@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1.Interfaces
 {
-    public interface IHeaterRepository
+    public interface ILightRepository
     {
-        public List<Heater> GetAllHeaters();
+        public List<Light> GetAllLights();
     }
 }

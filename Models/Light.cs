@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1.Models
 {
-    internal class Light: Device
+    public class Light: Device
     {
         public string Color { get; set; }
         public int Brightness { get; set; }
+
+        private static string className { get; set; }
 
         public Light(int Id, string Name, string Type, int Status, int ActiveTime, string Color, int Brightness)
         {
@@ -21,6 +23,13 @@ namespace ConsoleApp1.Models
 
             this.Color = Color;
             this.Brightness = Brightness;
+
+            className = this.GetType().Name;
+        }
+
+        public static string ClassName()
+        {
+            return className;
         }
     }
 }

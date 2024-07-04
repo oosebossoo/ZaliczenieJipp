@@ -6,10 +6,13 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1.Models
 {
-    internal class Heater: Device
+    public class Heater: Device
     {
         public int Temperature { get; set; }
         public int Timer { get; set; }
+        private static string className { get; set; }
+
+        public Heater() {}
 
         public Heater(int Id, string Name, string Type, int Status, int ActiveTime, int Temperature, int Timer)
         {
@@ -21,6 +24,13 @@ namespace ConsoleApp1.Models
 
             this.Temperature = Temperature;
             this.Timer = Timer;
+
+            className = this.GetType().Name;
+        }
+
+        public static string ClassName()
+        {
+            return className;
         }
     }
 }

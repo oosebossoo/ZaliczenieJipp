@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1.Interfaces
 {
-    public interface IHeaterRepository
+    public interface IHeaterBuilder
     {
-        public List<Heater> GetAllHeaters();
+        void BuildName();
+        void BuildType();
+        Device GetDevice();
     }
 }

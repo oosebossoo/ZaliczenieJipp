@@ -1,39 +1,34 @@
 ﻿using ConsoleApp1.Interfaces;
 using ConsoleApp1.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ConsoleApp1.Repositories
 {
-    public class HeaterRepository : IHeaterRepository
+    public class LightRepository : ILightRepository
     {
         public BaseRepository baseRepository { get; set; }
 
-        public HeaterRepository(BaseRepository baseRepository)
+        public LightRepository(BaseRepository baseRepository)
         {
             this.baseRepository = baseRepository;
         }
 
-        public List<Heater> GetAllHeaters()
+        public List<Light> GetAllLights()
         {
             List<Device> all = this.baseRepository.GetAll();
-            List<Heater> heaters = new List<Heater>();
+            List<Light> lights = new List<Light>();
             foreach (var device in all)
             {
                 if (this.typeCheck(device))
                 {
-                    heaters.Add((device as Heater));
+                    lights.Add((device as Light));
                 }
             }
-            return heaters;
+            return lights;
         }
 
         private bool typeCheck(Device device)
         {
-            return device.GetType().Name == Heater.ClassName();
+            return device.GetType().Name == Light.ClassName();
         }
     }
 }
