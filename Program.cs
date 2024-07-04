@@ -25,6 +25,8 @@ Console.WriteLine("new directions");
 Console.WriteLine($"x: {device2.DirectionX}");
 Console.WriteLine($"y: {device2.DirectionY}");
 
+// test
+
 //int input;
 //while (true)
 //{
