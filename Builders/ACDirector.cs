@@ -22,10 +22,10 @@ namespace ConsoleApp1.Builders
             return builder.GetDevice();
         }
 
-        public void ConstructReport()
+        public void ConstructAC(string Name, string Type)
         {
-            builder.BuildName();
-            builder.BuildType();
+            builder.BuildName(Name);
+            builder.BuildType(Type);
         }
     }
 }

@@ -1,10 +1,5 @@
 ﻿using ConsoleApp1.Interfaces;
 using ConsoleApp1.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ConsoleApp1.Builders
 {
@@ -12,14 +7,16 @@ namespace ConsoleApp1.Builders
     {
         private Heater device = new Heater();
 
-        public void BuildName()
+        public Device BuildName(string Name)
         {
-            device.Name = "Grzejnik w małym pokoju";
+            device.Name = Name;
+            return device;
         }
 
-        public void BuildType()
+        public Device BuildType(string Type)
         {
-            device.Type = "indoor";
+            device.Type = Type;
+            return device;
         }
 
         public Device GetDevice()

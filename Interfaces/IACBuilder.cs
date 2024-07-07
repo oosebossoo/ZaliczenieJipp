@@ -9,8 +9,8 @@ namespace ConsoleApp1.Interfaces
 {
     public interface IACBuilder
     {
-        void BuildName();
-        void BuildType();
+        Device BuildName(string Name);
+        Device BuildType(string Type);
         Device GetDevice();
     }
 }
